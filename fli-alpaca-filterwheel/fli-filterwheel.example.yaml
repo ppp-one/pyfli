@@ -1,0 +1,68 @@
+# FLI FilterWheel Alpaca Driver — configuration file
+#
+# Copy this file to fli-filterwheel.yaml (or any name, then set FLI_CONFIG)
+# and edit as required.  Environment variables always override values here.
+#
+# Usage:
+#   uv run fli-alpaca-filterwheel
+#   FLI_CONFIG=/etc/fli-filterwheel.yaml uv run fli-alpaca-filterwheel
+
+# ---------------------------------------------------------------------------
+# Hardware
+# ---------------------------------------------------------------------------
+
+# Full path to the FLI device node.  Leave as null (or omit) to auto-detect
+# the first filter wheel found on the chosen interface.
+device_path: null        # e.g. /dev/fliusb0  (Linux)  or  /dev/cu.usbserial  (macOS)
+
+# Interface type: usb | serial | parallel-port
+interface: usb
+
+# ---------------------------------------------------------------------------
+# Alpaca server
+# ---------------------------------------------------------------------------
+
+host: "0.0.0.0"          # bind address; use 127.0.0.1 to restrict to localhost
+port: 11111              # standard ASCOM Alpaca port
+
+# ---------------------------------------------------------------------------
+# Alpaca device identity
+# ---------------------------------------------------------------------------
+
+device_number: 0
+driver_name: "FLI FilterWheel Alpaca Driver"
+unique_id: "fli-filterwheel-0"   # must be unique on the network
+
+# ---------------------------------------------------------------------------
+# Behaviour
+# ---------------------------------------------------------------------------
+
+# Connect to the FLI hardware automatically at server startup.
+auto_connect: false
+
+log_level: INFO          # DEBUG | INFO | WARNING | ERROR
+
+# ---------------------------------------------------------------------------
+# Filter configuration
+#
+# List every slot in wheel order (slot 0 first).  The focus_offset is the
+# number of focuser steps (or micrometres, depending on your focuser) that
+# must be applied relative to a reference filter to maintain sharp focus.
+# Use 0 as the reference; positive values move the focuser out, negative in.
+# ---------------------------------------------------------------------------
+
+filters:
+  - name: L
+    focus_offset: 0
+  - name: R
+    focus_offset: -50
+  - name: G
+    focus_offset: -50
+  - name: B
+    focus_offset: -50
+  - name: Ha
+    focus_offset: 200
+  - name: OIII
+    focus_offset: 200
+  - name: SII
+    focus_offset: 200

@@ -43,3 +43,14 @@ Tested on Linux Fedora 17 and Windows 7 using python(x,y). The FLI SDK
 
 Another option for those interested in Python FLI support is Craig Versek's
 ctypes based wrappers https://github.com/cversek/python-FLI.
+
+## WIP: ASCOM Alpaca filter wheel driver
+
+The `fli-alpaca-filterwheel/` directory contains an ASCOM Alpaca driver for
+FLI filter wheels built on top of pyfli. It exposes the full
+IFilterWheelV3 interface over HTTP so any Alpaca-compatible client
+(e.g. NINA, Cartes du Ciel, Voyager) can control the wheel without
+needing a COM/ASCOM platform.
+
+See `fli-alpaca-filterwheel/README.md` for installation and configuration
+instructions.

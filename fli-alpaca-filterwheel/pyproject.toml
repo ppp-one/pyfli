@@ -1,0 +1,53 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "fli-alpaca-filterwheel"
+version = "1.0.0"
+description = "ASCOM Alpaca driver for FLI filter wheels via pyfli"
+requires-python = ">=3.10"
+authors = [{ name = "FLI Alpaca Driver" }]
+keywords = ["astronomy", "ascom", "alpaca", "fli", "filterwheel"]
+license = "MIT"
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+    "python-multipart>=0.0.9",
+    "pydantic>=2.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "httpx", "pytest-asyncio", "ruff"]
+
+[project.scripts]
+fli-alpaca-filterwheel = "fli_alpaca_filterwheel.main:run"
+
+[project.urls]
+Homepage = "https://github.com/ppp-one/pyfli"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/fli_alpaca_filterwheel"]
+
+# pyfli must be compiled manually; see README.
+[tool.uv.sources]
+pyfli = { path = ".." }
+
+[tool.ruff]
+line-length = 99
+
+[tool.ruff.lint]
+select = ["E", "F", "I001", "UP"]
+fixable = ["ALL"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.1",
+    "pytest>=9.0.3",
+    "pytest-asyncio>=1.4.0",
+]
